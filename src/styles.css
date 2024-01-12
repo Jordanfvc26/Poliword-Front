@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #5952A2;
+    --secondary-color: #E2E0F9;
+    --white: #FFFFFF;
+    --black: #303030;
+    --text-color: #888888;
+}
+
+
+/* Styles for buttons */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    border-color: var(--primary-color) !important;
+    padding: 5px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+.btn-outline-primary {
+    background-color: var(--white) !important;
+    color: var(--primary-color) !important;
+    border-color:var(--primary-color)!important;
+    padding: 5px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+
+/* Styles for links */
+a{
+    color: var(--primary-color) !important;
+    cursor: pointer !important;
+}
+
+
+/* Styles for inputs */
+.form-control-lg {
+    border-radius: 10px;
+    padding: 4px 10px !important;
+}
+
+.form-select{
+    padding: 7px !important;
+}
