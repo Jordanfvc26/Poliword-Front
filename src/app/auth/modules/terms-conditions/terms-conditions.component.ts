@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,7 +23,7 @@ export class TermsConditionsComponent {
 
   //constructor
   constructor(
-    private router: Router
+    private location: Location
   ){}
 
   //NgOnInit()
@@ -33,8 +33,8 @@ export class TermsConditionsComponent {
   }
 
   //Método que redirecciona al login
-  goToLogin(){
-    this.router.navigateByUrl("auth/login");
+  goToBack(){
+    this.location.back();
   }
 
   //Icons to use

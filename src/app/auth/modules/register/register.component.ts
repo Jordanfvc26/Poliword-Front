@@ -10,14 +10,15 @@ import { ApiResponseRegisterUserI } from '../../interfaces/register-user';
 import { ToastAlertsService } from '../../services/toast-alerts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    CommonModule, 
-    FontAwesomeModule, 
-    ReactiveFormsModule, 
+    CommonModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ToastrModule
   ],
@@ -139,17 +140,23 @@ export class RegisterComponent {
   // Método que registra un nuevo usuario
   registerNewUser() {
     this.registerUserService.registerNewUser(this.registerForm.value)
-    .subscribe({
-      next: (res: ApiResponseRegisterUserI) => {
-        if (res.status == "success") {
-          this.toastr.showToastSuccess("Usuario registrado con éxito", "Éxito")
-          this.router.navigateByUrl("auth/login");
+      .subscribe({
+        next: (res: ApiResponseRegisterUserI) => {
+          if (res.status == "success") {
+            this.toastr.showToastSuccess("Usuario registrado con éxito", "Éxito")
+            this.router.navigateByUrl("auth/login");
+          }
+        },
+        error: (err: any) => {
+          this.toastr.showToastError("Error", "No se ha podido registrar el usuario");
         }
-      },
-      error: (err: any) => {
-        this.toastr.showToastError("Error", "No se ha podido registrar el usuario");
-      }
-    })
+      })
+  }
+
+  //Método que redirige al apartado de términos y condiciones
+  goToTermsConditions(type: number) {
+    TermsConditionsComponent.type = type;
+    this.router.navigateByUrl("auth/terms-conditions");
   }
 
   /*Icons to use*/

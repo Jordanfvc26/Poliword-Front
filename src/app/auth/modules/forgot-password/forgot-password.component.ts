@@ -8,6 +8,7 @@ import { ToastAlertsService } from '../../services/toast-alerts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import * as AOS from 'aos';
+import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -75,4 +76,10 @@ export class ForgotPasswordComponent {
   goToLoginForm(){
     this.router.navigateByUrl("auth/login");
   }
+
+    //Método que redirige al apartado de términos y condiciones
+    goToTermsConditions(type: number) {
+      TermsConditionsComponent.type = type;
+      this.router.navigateByUrl("auth/terms-conditions");
+    }
 }
