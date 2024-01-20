@@ -1,3 +1,4 @@
+import { SpinnerComponent } from './../../../shared-components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +9,7 @@ import { LoginService } from '../../services/login.service';
 import { environment } from '../../../../environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { ToastAlertsService } from '../../services/toast-alerts.service';
+import { ToastAlertsService } from '../../../shared-components/services/toast-alerts.service';
 import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.component';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 import * as AOS from 'aos';
@@ -21,7 +22,8 @@ import * as AOS from 'aos';
     FontAwesomeModule, 
     ReactiveFormsModule, 
     HttpClientModule, 
-    ToastrModule
+    ToastrModule,
+    SpinnerComponent
   ],
   providers: [
     LoginService,
@@ -50,6 +52,7 @@ export class LoginComponent {
 
   //NgOnInit()
   ngOnInit() {
+    this.spinnerStatus = true;
     AOS.init();
     this.spinnerStatus = true;
   }
@@ -74,6 +77,7 @@ export class LoginComponent {
 
   // Método que inicia la sesión del usuario
   loginUser() {
+    this.spinnerStatus = false;
     if (this.loginForm.valid) {
       const body = {
         email: this.loginForm.value.email,
@@ -90,9 +94,11 @@ export class LoginComponent {
               this.router.navigateByUrl('/student/home/learn/modules');
               this.toastr.showToastSuccess("Inicio de sesión exitoso", "Bienvenido")
             } else if (res.user.type_user === environment.TEACHER) {
+              this.spinnerStatus = true;
               this.router.navigateByUrl('/teacher/home/dashboard');
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Profesor")
             } else if (res.user.type_user === environment.ADMIN) {
+              this.spinnerStatus = true;
               this.router.navigateByUrl('/student/home/dashboard');
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Administrador")
             }

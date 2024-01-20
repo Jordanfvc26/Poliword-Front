@@ -4,8 +4,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DashboardI } from '../interfaces/dashboard';
 import { environment } from '../../../environments/environment';
-import * as iconos from '@fortawesome/free-solid-svg-icons';
 import { UserLoginI } from '../../auth/interfaces/login';
+import { SpinnerComponent } from '../spinner/spinner.component';
+import * as iconos from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ import { UserLoginI } from '../../auth/interfaces/login';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterModule    
+    RouterModule,
+    SpinnerComponent    
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -23,6 +25,7 @@ export class DashboardComponent {
   //Variables
   optionsMenu: DashboardI [] = [];
   userInformation: UserLoginI = {} as UserLoginI;
+  spinnerStatus: boolean = false;
 
   //constructor
   constructor(
@@ -32,6 +35,7 @@ export class DashboardComponent {
 
   //ngOnInit()
   ngOnInit(){
+    this.spinnerStatus = true;
     this.userInformation = JSON.parse(sessionStorage.getItem("infoUser") || '{}');
     this.showHideMenuProfile();
     this.showHideSidebar();
@@ -128,12 +132,12 @@ export class DashboardComponent {
 
   //Método que cierra la sesión del usuario
   signOut() {
-    //this.spinnerStatus = false;
+    this.spinnerStatus = false;
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("role");
     sessionStorage.removeItem("token");
     setTimeout(() => {
-      //this.spinnerStatus = true;
+      this.spinnerStatus = true;
       this.router.navigateByUrl('auth/login');
     }, 2000);
   }

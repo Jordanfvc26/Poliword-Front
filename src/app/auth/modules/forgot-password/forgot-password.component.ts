@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastAlertsService } from '../../services/toast-alerts.service';
+import { ToastAlertsService } from '../../../shared-components/services/toast-alerts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import * as AOS from 'aos';
 import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.component';
+import { SpinnerComponent } from '../../../shared-components/spinner/spinner.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,7 +18,8 @@ import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.c
     CommonModule, 
     ReactiveFormsModule, 
     HttpClientModule,
-    ToastrModule
+    ToastrModule,
+    SpinnerComponent
   ],
   providers: [
     ForgotPasswordService
@@ -28,6 +30,7 @@ import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.c
 export class ForgotPasswordComponent {
   //Variables
   forgotPasswordForm!: FormGroup;
+  spinnerStatus: boolean = false;
 
   //Constructor
   constructor(
@@ -39,6 +42,7 @@ export class ForgotPasswordComponent {
 
   //ngOnInit()
   ngOnInit(){
+    this.spinnerStatus = true;
     AOS.init();
     this.createForgotPasswordForm();
   }
@@ -57,15 +61,18 @@ export class ForgotPasswordComponent {
 
   //Método que consume el servicio para enviar correo de recuperación
   forgotPassword(){
+    this.spinnerStatus = false;
     this.forgotPasswordService.sendEmailRecoveryPassword(this.forgotPasswordForm.value)
     .subscribe({
       next: (res: ApiResponseForgotPasswordI) => {
         if (res.status == "success") {
+          this.spinnerStatus = true;
           this.toastr.showToastSuccess("Revise su correo electrónico", "Éxito")
           this.router.navigateByUrl("auth/login");
         }
       },
       error: (error: ApiResponseForgotPasswordI) => {
+        this.spinnerStatus = true;
         this.toastr.showToastError("Error", error.message);
       }
     })

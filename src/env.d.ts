@@ -15,6 +15,12 @@ interface ImportMetaEnv {
   readonly NG_APP_STUDENT: string;
   readonly NG_APP_TEACHER: string;
   readonly NG_APP_ADMIN: string;
+  readonly NG_APP_CURRENT_PAGE: number;
+  readonly NG_APP_ITEMS_FOR_PAGE: number;
+  readonly NG_APP_TOTAL_PAGES: number;
+  readonly NG_APP_ORDER_BY: string;
+  readonly NG_APP_MODE_ORDER: string;
+
 }
 
 /*

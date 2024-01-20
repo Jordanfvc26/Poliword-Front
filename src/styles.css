@@ -5,6 +5,7 @@
     --white: #FFFFFF;
     --black: #303030;
     --text-color: #888888;
+    --alert-color: #FC3B56;
 }
 
 
@@ -45,4 +46,18 @@
 
 .form-select{
     padding: 7px !important;
+}
+
+/*Styles for title modules*/
+.title-module>h4{
+    font-weight: 700;
+    color: var(--black) !important;
+}
+
+.title-module>h4>fa-icon{
+    color: var(--primary-color) !important;
+}
+
+.validators {
+    color: var(--alert-color) !important;
 }

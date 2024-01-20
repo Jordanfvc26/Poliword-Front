@@ -7,10 +7,11 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
 import * as AOS from 'aos';
 import { RegisterUserService } from '../../services/register-user.service';
 import { ApiResponseRegisterUserI } from '../../interfaces/register-user';
-import { ToastAlertsService } from '../../services/toast-alerts.service';
+import { ToastAlertsService } from '../../../shared-components/services/toast-alerts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.component';
+import { SpinnerComponent } from '../../../shared-components/spinner/spinner.component';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ import { TermsConditionsComponent } from '../terms-conditions/terms-conditions.c
     FontAwesomeModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule
+    ToastrModule,
+    SpinnerComponent
   ],
   providers: [
     RegisterUserService
@@ -33,6 +35,7 @@ export class RegisterComponent {
   showPassword: boolean = false;
   optionTypeUserSelected: string = "";
   registerForm!: FormGroup;
+  spinnerStatus: boolean = false;
 
   //Constructor
   constructor(
@@ -44,6 +47,7 @@ export class RegisterComponent {
 
   //ngOnInit
   ngOnInit() {
+    this.spinnerStatus = true;
     this.createRegisterForm();
     AOS.init();
   }
@@ -139,15 +143,18 @@ export class RegisterComponent {
 
   // Método que registra un nuevo usuario
   registerNewUser() {
+    this.spinnerStatus = false;
     this.registerUserService.registerNewUser(this.registerForm.value)
       .subscribe({
         next: (res: ApiResponseRegisterUserI) => {
           if (res.status == "success") {
+            this.spinnerStatus = true;
             this.toastr.showToastSuccess("Usuario registrado con éxito", "Éxito")
             this.router.navigateByUrl("auth/login");
           }
         },
         error: (err: any) => {
+          this.spinnerStatus = true;
           this.toastr.showToastError("Error", "No se ha podido registrar el usuario");
         }
       })
