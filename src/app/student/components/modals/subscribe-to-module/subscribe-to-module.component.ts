@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SubscribedModulesService } from '../../../services/subscribed-modules.service';
 import { ModulesComponent } from '../../learn/modules/modules.component';
-import { ApiResponseSubscribeToModuleI, SubscribeToModuleI } from '../../../interfaces/subscribed-modules';
 import { SpinnerComponent } from '../../../../shared-components/spinner/spinner.component';
+import { ApiResponseSubscribeToModuleI, SubscribeToModuleI } from '../../../interfaces/subscribed-modules';
+import { SubscribedModulesService } from '../../../services/subscribed-modules.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,7 +18,6 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
     FontAwesomeModule,
     ToastrModule,
     ReactiveFormsModule,
-    ModulesComponent,
     SpinnerComponent
   ],
   providers: [
@@ -74,7 +73,7 @@ export class SubscribeToModuleComponent {
         }
         else{
           this.spinnerStatus = true;
-          this.toastr.error("Código incorrecto o módulo no existe", "¡Error!");
+          this.toastr.error("Código incorrecto o el módulo no existe", "¡Error!");
         }
       },
       (error: any) => {

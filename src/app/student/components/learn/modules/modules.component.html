@@ -22,10 +22,13 @@
             <div class="card">
                 <!--[src]="module.img_back_url ? module.img_back_url : '../../../../../assets/bg-module.svg'"-->
                 <img src="../../../../../assets/bg-module.svg" class="card-img-top" alt="background-module"
-                    (click)="module.is_subscribed ? showAlertPractice(module.title) : showAlertSuscribe(module.title, subscribeToModule)">
+                    (click)="module.is_subscribed ? showAlertPractice(module.title) : showAlertSuscribe(module.title, module.code)">
                 <div class="card-body">
-                    <p class="mb-1"><fa-icon [icon]="iconTitle" class="icon-module"></fa-icon><b> {{module.title}}</b>
-                    </p>
+                    <div class="title-module d-flex flex-wrap justify-content-between">
+                        <p class="mb-1"><fa-icon [icon]="iconTitle" class="icon-module"></fa-icon><b> {{module.title}}</b>
+                        </p>
+                        <fa-icon [icon]="iconViewDetails" class="icon-module" (click)="openModalViewDetailComponent(viewModuleDetail, module.id)"></fa-icon>
+                    </div>
                     @if(statusFilter === "all"){
                     <span class="text-body-card" [style.background-color]="module.is_subscribed ? '#198754' : '#5952A2'"
                         [style.border-radius]="module.is_subscribed ? '5px' : '5px'"
@@ -50,7 +53,7 @@
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled" [class.disabled]="currentPage === 1">
                     <a class="page-link custom-page-link" (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"
-                        > <fa-icon [icon]="iconBack"></fa-icon> Atrás</a>
+                        > <fa-icon [icon]="iconBack"></fa-icon> Anterior</a>
                 </li>
                 @for(page of arrayPaginator; track $index){
                 <li class="page-item" [class.active]="currentPage === $index + 1">
@@ -71,3 +74,8 @@
 <ng-template #subscribeToModule>
    <app-subscribe-to-module></app-subscribe-to-module>
 </ng-template>
+
+<!--Modal para ver información de un módulo-->
+<ng-template #viewModuleDetail>
+    <app-view-module-detail></app-view-module-detail>
+ </ng-template>

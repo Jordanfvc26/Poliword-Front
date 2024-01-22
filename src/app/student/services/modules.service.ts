@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponseAllModulesI } from '../interfaces/modules';
+import { ApiResponseAllModulesI, DataAllModulesI } from '../interfaces/modules';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,13 @@ export class ModulesService {
     return this.http.get<ApiResponseAllModulesI>(this.urlApi + `/api/module/with-is-subscribed${queryParams}`, this.options);
   }
 
+  //Método que obtiene la información de un módulo por su ID
+  getModuleById(headers: Map<string, any>, idModule: number): Observable<DataAllModulesI> {
+    this.options = this.getHeaders(headers);
+    return this.http.get<DataAllModulesI>(this.urlApi + `/api/module/${idModule}`, this.options);
+  }
+
+  
   //Método que obtiene los headers
   public getHeaders(headers: Map<string, any> | undefined) {
     if (headers != null) {

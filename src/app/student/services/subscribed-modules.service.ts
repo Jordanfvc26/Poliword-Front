@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiResponseSubscribeToModuleI, ApiResponseSubscribedModulesI, SubscribeToModuleI } from '../interfaces/subscribed-modules';
 import { Observable } from 'rxjs';
+import { ApiResponseSubscribeToModuleI, ApiResponseSubscribedModulesI, SubscribeToModuleI } from '../interfaces/subscribed-modules';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class SubscribedModulesService {
      return this.http.get<ApiResponseSubscribedModulesI>(this.urlApi + `/api/module/subscribed${queryParams}`, this.options);
    }
  
-
+   
    //Método que obtiene los headers
    public getHeaders(headers: Map<string, any> | undefined) {
      if (headers != null) {

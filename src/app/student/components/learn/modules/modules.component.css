@@ -33,6 +33,10 @@ body {
     color: var(--primary-color);
 }
 
+.title-module>fa-icon{
+    cursor: pointer;
+}
+
 
 /* Estilos personalizados para el color del paginador */
 .custom-page-link {

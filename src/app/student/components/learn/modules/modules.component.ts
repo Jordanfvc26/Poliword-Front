@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { SpinnerComponent } from '../../../../shared-components/spinner/spinner.component';
+import { SubscribeToModuleComponent } from '../../modals/subscribe-to-module/subscribe-to-module.component';
+import { ViewModuleDetailComponent } from '../../modals/view-module-detail/view-module-detail.component';
 import { SweetAlertsConfirm } from '../../../../shared-components/alerts/confirm-alerts.component';
+import { ApiResponseSubscribeToModuleI, ApiResponseSubscribedModulesI, SubscribeToModuleI } from '../../../interfaces/subscribed-modules';
+import { ApiResponseAllModulesI } from '../../../interfaces/modules';
 import { ToastAlertsService } from '../../../../shared-components/services/toast-alerts.service';
 import { ModulesService } from '../../../services/modules.service';
 import { SubscribedModulesService } from '../../../services/subscribed-modules.service';
-import { ApiResponseAllModulesI } from '../../../interfaces/modules';
-import { ApiResponseSubscribedModulesI } from '../../../interfaces/subscribed-modules';
 import { environment } from '../../../../../environments/environment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
-import { SubscribeToModuleComponent } from '../../modals/subscribe-to-module/subscribe-to-module.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modules',
@@ -24,7 +25,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ToastrModule,
     SpinnerComponent,
-    SubscribeToModuleComponent
+    SubscribeToModuleComponent, //Hacia donde voy
+    ViewModuleDetailComponent 
+     
   ],
   providers: [
     ModulesService,
@@ -37,7 +40,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModulesComponent {
   //Variables
   arrayModules: ApiResponseAllModulesI = {} as ApiResponseAllModulesI;
-  spinnerStatus: boolean = false;
   arrayPaginator: number[] = [];
   totalPage: number = environment.TOTAL_PAGES;
   currentPage: number = 1;
@@ -45,6 +47,7 @@ export class ModulesComponent {
   orderBy: string = environment.ORDER_BY;
   modeOrder: string = environment.MODE_ORDER;
   statusFilter: string = "all";
+  spinnerStatus: boolean = false;
 
   //Constructor
   constructor(
@@ -153,10 +156,30 @@ export class ModulesComponent {
   }
 
   //Método que muestra un alert para preguntar si desea suscribirse a un curso
-  showAlertSuscribe(nameModule: string, subscribeToModule: any) {
+  showAlertSuscribe(nameModule: string, codeModule: string) {
     this.sweetAlerts.alertConfirmCancelInformation("Módulo disponible", "Actualmente no te encuestras suscrito en el módulo de \"" + nameModule + "\" ¿Deseas suscribirte ahora?").then(respuesta => {
       if (respuesta.value == true) {
-        this.openModalSubscribeToModule(subscribeToModule);
+        this.sweetAlerts.alertConfirmCancelQuestion("Nueva suscripción", "Estás a punto de suscribirte al módulo \"" + nameModule + "\" ¿Deseas continuar?").then(respuesta => {
+          if (respuesta.value == true) {
+            let body: SubscribeToModuleI = {
+              code: codeModule
+            }
+            this.modulesSuscribedStudent.subscribeToModule(this.getHeaders(), body).subscribe({
+              next: (data: ApiResponseSubscribeToModuleI) => {
+                this.spinnerStatus = false;
+                if (data.status == 'success') {
+                  this.spinnerStatus = true;
+                  this.modal.dismissAll();
+                  this.toastr.showToastSuccess("Te has suscrito correctamente", "¡Éxito!");
+                }
+                else {
+                  this.spinnerStatus = true;
+                  this.toastr.showToastError("Error", "No se ha podido suscribir al módulo");
+                }
+              }
+            })
+          }
+        });
       }
     });
   }
@@ -166,10 +189,17 @@ export class ModulesComponent {
     this.modal.open(subscribeToModule, { size: 'md', centered: true });
   }
 
+  //Método que abre el modal para ver el detalle de un módulo
+  openModalViewDetailComponent(viewModuleDetail: any, moduleID:number){
+    this.modal.open(viewModuleDetail, { size: 'md', centered: true });
+    ViewModuleDetailComponent.moduleID = moduleID;
+  }
+
   //Icons to use
   iconModules = iconos.faCubes;
   iconAdd = iconos.faPlusCircle;
   iconTitle = iconos.faCube;
   iconBack = iconos.faArrowLeft;
   iconNext = iconos.faArrowRight;
+  iconViewDetails = iconos.faEye;
 }
