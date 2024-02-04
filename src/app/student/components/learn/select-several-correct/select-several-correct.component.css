@@ -1,0 +1,17 @@
+.option label {
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
+}
+
+/*For small screens*/
+@media screen and (max-width: 768px) {
+    .option label {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .option-number {
+        display: none;
+    }
+}

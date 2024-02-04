@@ -41,7 +41,7 @@ export class DashboardComponent {
     this.showHideSidebar();
     this.detectedScreen();
     this.optionSelectedOnMenu();
-    this.router.navigate(['options-home'], { relativeTo: this.routerActivated })
+    this.router.navigate(['learn/modules'], { relativeTo: this.routerActivated })
 
     if(sessionStorage.getItem("typeUser")==environment.STUDENT){
       this.optionsMenu.push({icon: this.iconPractice, optionName: 'Practicar', link: 'practice/options', status: true});

@@ -1,4 +1,6 @@
-<app-spinner *ngIf="!spinnerStatus"></app-spinner>
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
 
 <body>
     <div class="row d-flex">
@@ -22,7 +24,7 @@
             <div class="card">
                 <!--[src]="module.img_back_url ? module.img_back_url : '../../../../../assets/bg-module.svg'"-->
                 <img src="../../../../../assets/bg-module.svg" class="card-img-top" alt="background-module"
-                    (click)="module.is_subscribed ? showAlertPractice(module.title) : showAlertSuscribe(module.title, module.code)">
+                (click)="showAlertPracticeOrSubscribe(module, statusFilter, module.id)">
                 <div class="card-body">
                     <div class="title-module d-flex flex-wrap justify-content-between">
                         <p class="mb-1"><fa-icon [icon]="iconTitle" class="icon-module"></fa-icon><b> {{module.title}}</b>
@@ -30,12 +32,12 @@
                         <fa-icon [icon]="iconViewDetails" class="icon-module" (click)="openModalViewDetailComponent(viewModuleDetail, module.id)"></fa-icon>
                     </div>
                     @if(statusFilter === "all"){
-                    <span class="text-body-card" [style.background-color]="module.is_subscribed ? '#198754' : '#5952A2'"
-                        [style.border-radius]="module.is_subscribed ? '5px' : '5px'"
-                        [style.padding]="module.is_subscribed ? '4px' : '4px'"
-                        [style.color]="module.is_subscribed ? 'white' : 'white'">
-                        {{module.is_subscribed ? 'Suscrito' : 'Disponible'}}
-                    </span>
+                        <span class="text-body-card" [style.background-color]="module.is_subscribed ? '#198754' : '#5952A2'"
+                            [style.border-radius]="module.is_subscribed ? '5px' : '5px'"
+                            [style.padding]="module.is_subscribed ? '4px' : '4px'"
+                            [style.color]="module.is_subscribed ? 'white' : 'white'">
+                            {{module.is_subscribed ? 'Suscrito' : 'Disponible'}}
+                        </span>
                     }
                     @if(statusFilter === "subscribed"){
                     <span class="text-body-card" [style.background-color]="'#FCE464'" [style.border-radius]="'5px'"
