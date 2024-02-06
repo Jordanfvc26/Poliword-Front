@@ -68,7 +68,7 @@ export class ModulesService {
   //Método que consume el servicio para validar una pregunta
   validateResponseUser(headers: Map<string, any>, answerUserID:number, body: BodyValidateAnswerI): Observable<ApiResponseValidateAnswerI> {
     this.options = this.getHeaders(headers);
-    return this.http.put<ApiResponseValidateAnswerI>(this.urlApi + `/api/module/validate-answer/${answerUserID}`, body, this.options);
+    return this.http.put<ApiResponseValidateAnswerI>(this.urlApi + `/api/module/test/validate-answer/${answerUserID}`, body, this.options);
   }
 
   //Método que finaliza una lección de actividades en un módulo, por medio del ID de la lección

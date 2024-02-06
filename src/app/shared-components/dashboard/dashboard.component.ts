@@ -44,7 +44,6 @@ export class DashboardComponent {
     this.router.navigate(['learn/modules'], { relativeTo: this.routerActivated })
 
     if(sessionStorage.getItem("typeUser")==environment.STUDENT){
-      this.optionsMenu.push({icon: this.iconPractice, optionName: 'Practicar', link: 'practice/options', status: true});
       this.optionsMenu.push({icon: this.iconPositions, optionName: 'Posiciones', link: 'positions/positions-table', status: true});
       this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/my-class', status: true});
       this.optionsMenu.push({icon: this.iconChatIA, optionName: 'Chat IA', link: 'chat-ia', status: true});
@@ -153,7 +152,7 @@ export class DashboardComponent {
   iconPractice = iconos.faFileLines;
   iconPositions = iconos.faUsers;
   iconMyClass = iconos.faChalkboardTeacher;
-  iconChatIA = iconos.faChartSimple;
+  iconChatIA = iconos.faComments;
 
   //PROFESOR: iconos de las opciones del menú
 
