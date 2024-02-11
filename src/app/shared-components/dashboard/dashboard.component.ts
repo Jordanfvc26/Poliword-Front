@@ -41,9 +41,9 @@ export class DashboardComponent {
     this.showHideSidebar();
     this.detectedScreen();
     this.optionSelectedOnMenu();
-    this.router.navigate(['learn/modules'], { relativeTo: this.routerActivated })
-
+    
     if(sessionStorage.getItem("typeUser")==environment.STUDENT){
+      this.router.navigate(['positions/positions-table'], { relativeTo: this.routerActivated })
       this.optionsMenu.push({icon: this.iconPositions, optionName: 'Posiciones', link: 'positions/positions-table', status: true});
       this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/my-class', status: true});
       this.optionsMenu.push({icon: this.iconChatIA, optionName: 'Chat IA', link: 'chat-ia', status: true});

@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="modal-header">
-        <h4 class="modal-title"><fa-icon [icon]="iconModules"></fa-icon> Nueva suscripción</h4>
+        <h4 class="modal-title"><fa-icon [icon]="codeClass"></fa-icon> Unirse a una clase</h4>
     </div>
     <div class="modal-body">
         <div class="row alert-info">
@@ -28,8 +28,7 @@
                     <use xlink:href="#info-fill" />
                 </svg>
                 <div>
-                    Si tiene un código de módulo o su profesor le ha proporcionado uno, ingréselo para poder suscribirse
-                    a dicho módulo.
+                    Si tiene un código de clase o su profesor le ha proporcionado uno, ingréselo para poder unirse a la clase correspondiente.
                 </div>
             </div>
         </div>
@@ -39,11 +38,11 @@
             <div class="col-12">
                 <label class="mb-1"><b>Código</b></label>
                 <input type="text" placeholder="Código*" class="form-control form-control-lg bg-light fs-6"
-                    formControlName="codeModule"
+                    formControlName="codeClass"
                     [ngClass]="{
-                        'is-invalid': codeForm.get('codeModule')?.hasError('required') && codeForm.get('codeModule')?.touched || codeForm.get('codeModule')?.hasError('pattern'),}"
+                        'is-invalid': codeForm.get('codeClass')?.hasError('required') && codeForm.get('codeClass')?.touched || codeForm.get('codeClass')?.hasError('pattern'),}"
                     [maxlength]="50" />
-                @if(codeForm.get('codeModule')?.hasError('required') && codeForm.get('codeModule')?.touched){
+                @if(codeForm.get('codeClass')?.hasError('required') && codeForm.get('codeClass')?.touched){
                     <div class="validators">
                         <small>¡Este campo es requerido!</small>
                     </div>
@@ -54,6 +53,6 @@
     </div>
     <div class="modal-footer">
         <button (click)="modal.dismissAll()" type="button" class="btn btn-outline-primary btn">Cancelar</button>
-        <button (click)="subscribeToModule()" [disabled]="!codeForm.valid" type="button" class="btn btn-primary btn">Suscribirme</button>
+        <button (click)="joinToClass()" [disabled]="!codeForm.valid" type="button" class="btn btn-primary btn">Unirme</button>
     </div>
 </div>

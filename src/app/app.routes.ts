@@ -11,39 +11,44 @@ import { MyClassComponent } from './student/components/classes/my-class/my-class
 import { ChatIaComponent } from './student/components/chat/chat-ia/chat-ia.component';
 import { TheoryComponent } from './student/components/learn/theory/theory.component';
 import { ActivitiesContainerComponent } from './student/components/learn/activities-container/activities-container.component';
+import { MyEvaluationsComponent } from './student/components/classes/my-evaluations/my-evaluations.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'auth', pathMatch: 'full' },
-    {
-        path: 'auth',
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  {
+    path: 'auth',
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'terms-conditions', component: TermsConditionsComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+    ]
+  },
+  {
+    path: 'student',
+    children: [
+      {
+        path: 'home', component: DashboardComponent,
         children: [
-            { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent },
-            { path: 'forgot-password', component: ForgotPasswordComponent },
-            { path: 'terms-conditions', component: TermsConditionsComponent },
-            { path: '', redirectTo: 'login', pathMatch: 'full' },
-        ]
-    },
-    {
-        path: 'student',
-        children: [
+          { path: 'learn/modules', component: ModulesComponent },
+          { path: 'practice/options', component: PracticeOptionsComponent },
+          { path: 'positions/positions-table', component: PositionsTableComponent },
           {
-            path: 'home', component: DashboardComponent,
+            path: 'classes',
             children: [
-              { path: 'learn/modules', component: ModulesComponent },
-              { path: 'practice/options', component: PracticeOptionsComponent },
-              { path: 'positions/positions-table', component: PositionsTableComponent },
-              { path: 'classes/my-class', component: MyClassComponent },
-              { path: 'chat-ia', component: ChatIaComponent },
-               // Agregado
-              // ... otras rutas
-              { path: '', redirectTo: 'learn/modules', pathMatch: 'full' },
-            ],
+              { path: 'my-class', component: MyClassComponent },
+              { path: 'my-evaluations', component: MyEvaluationsComponent },
+            ]
           },
-          { path: '', redirectTo: '/student/home/learn/modules', pathMatch: 'full' },
-          { path: 'home/theory', component: TheoryComponent },
-          { path: 'home/activities', component: ActivitiesContainerComponent },
-        ]
+          { path: 'chat-ia', component: ChatIaComponent },
+          { path: '', redirectTo: 'learn/modules', pathMatch: 'full' },
+        ],
       },
-      
+      { path: '', redirectTo: '/student/home/learn/modules', pathMatch: 'full' },
+      { path: 'home/theory', component: TheoryComponent },
+      { path: 'home/activities', component: ActivitiesContainerComponent },
+    ]
+  },
+
 ];

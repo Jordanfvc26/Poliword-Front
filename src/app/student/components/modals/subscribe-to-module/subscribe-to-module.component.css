@@ -5,3 +5,8 @@ fa-icon{
 .alert-info{
     padding: 0px 10px;
 }
+
+.btn-outline-primary{
+    color: var(--alert-color) !important;
+    border-color: var(--alert-color) !important;
+}
