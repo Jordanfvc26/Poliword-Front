@@ -26,6 +26,7 @@ export class DashboardComponent {
   optionsMenu: DashboardI [] = [];
   userInformation: UserLoginI = {} as UserLoginI;
   spinnerStatus: boolean = false;
+  typeUser: string = '';
 
   //constructor
   constructor(
@@ -36,24 +37,33 @@ export class DashboardComponent {
   //ngOnInit()
   ngOnInit(){
     this.spinnerStatus = true;
+    this.typeUser = sessionStorage.getItem("typeUser") || "student";
     this.userInformation = JSON.parse(sessionStorage.getItem("infoUser") || '{}');
-    this.showHideMenuProfile();
-    this.showHideSidebar();
-    this.detectedScreen();
-    this.optionSelectedOnMenu();
-    
-    if(sessionStorage.getItem("typeUser")==environment.STUDENT){
-      this.router.navigate(['positions/positions-table'], { relativeTo: this.routerActivated })
+
+    if(this.typeUser==environment.STUDENT){
+      this.router.navigate(['learn/modules'], { relativeTo: this.routerActivated })
       this.optionsMenu.push({icon: this.iconPositions, optionName: 'Posiciones', link: 'positions/positions-table', status: true});
       this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/my-class', status: true});
       this.optionsMenu.push({icon: this.iconChatIA, optionName: 'Chat IA', link: 'chat-ia', status: true});
       this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help', status: true});
       this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
     }
-    else if(sessionStorage.getItem("typeUser")==environment.TEACHER){
-
+    else if(this.typeUser==environment.TEACHER){
+      this.router.navigate(['modules/list-modules'], { relativeTo: this.routerActivated })
+      this.optionsMenu.push({icon: this.iconModules, optionName: 'Módulos', link: 'modules/list-modules', status: true});
+      this.optionsMenu.push({icon: this.iconActivities, optionName: 'Actividades', link: 'activities/list-activities', status: true});
+      this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/list-classes', status: true});
+      this.optionsMenu.push({icon: this.iconChatIA, optionName: 'Chat IA', link: 'chat-ia', status: true});
+      this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help', status: true});
+      this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
     }
-    else (sessionStorage.getItem("typeUser")==environment.ADMIN)
+    else {
+      //Opciones de administrador
+    }
+    this.showHideMenuProfile();
+    this.showHideSidebar();
+    this.detectedScreen();
+    this.optionSelectedOnMenu();
   }
 
   // Método que muestra y oculta el menú de la foto de perfil
@@ -124,16 +134,11 @@ export class DashboardComponent {
     });
   }
 
-  //Método que obtiene la información del usuario logueado
-  getUser() {
-    console.log(sessionStorage.getItem("user"));
-  }
-
   //Método que cierra la sesión del usuario
   signOut() {
     this.spinnerStatus = false;
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("role");
+    sessionStorage.removeItem("infoUser");
+    sessionStorage.removeItem("typeUser");
     sessionStorage.removeItem("token");
     setTimeout(() => {
       this.spinnerStatus = true;
@@ -155,6 +160,9 @@ export class DashboardComponent {
   iconChatIA = iconos.faComments;
 
   //PROFESOR: iconos de las opciones del menú
+  iconHome = iconos.faHome;
+  iconModules = iconos.faCubes;
+  iconActivities = iconos.faIcons;
 
   //ADMINISTRADOR: iconos de las opciones del menú
 

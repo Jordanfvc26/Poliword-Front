@@ -88,18 +88,18 @@ export class LoginComponent {
           next: (res: ApiResponseLogin) => {
             sessionStorage.setItem("token", res.token);
             sessionStorage.setItem("typeUser", res.user.type_user);
+            sessionStorage.setItem("infoUser", JSON.stringify(res.user));
             if (res.user.type_user == environment.STUDENT) {
               this.spinnerStatus = true;
-              sessionStorage.setItem("infoUser", JSON.stringify(res.user));
               this.router.navigateByUrl('/student/home/learn/modules');
               this.toastr.showToastSuccess("Inicio de sesión exitoso", "Bienvenido")
             } else if (res.user.type_user === environment.TEACHER) {
               this.spinnerStatus = true;
-              this.router.navigateByUrl('/teacher/home/dashboard');
+              this.router.navigateByUrl('/teacher/home/dashboard/options');
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Profesor")
             } else if (res.user.type_user === environment.ADMIN) {
               this.spinnerStatus = true;
-              this.router.navigateByUrl('/student/home/dashboard');
+             /*  this.router.navigateByUrl('/student/home/dashboard'); */
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Administrador")
             }
           },

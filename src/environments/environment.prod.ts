@@ -9,5 +9,7 @@ export const environment = {
     TOTAL_PAGES: import.meta.env.NG_APP_TOTAL_PAGES,
     ORDER_BY: import.meta.env.NG_APP_ORDER_BY,
     MODE_ORDER: import.meta.env.NG_APP_MODE_ORDER,
+    ITEMS_FOR_PAGE_TABLES: import.meta.env.NG_APP_ITEMS_FOR_PAGE_TABLES,
+    SEARCH_BY: import.meta.env.NG_APP_SEARCH_BY
   };
   

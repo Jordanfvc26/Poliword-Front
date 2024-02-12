@@ -20,6 +20,8 @@ interface ImportMetaEnv {
   readonly NG_APP_TOTAL_PAGES: number;
   readonly NG_APP_ORDER_BY: string;
   readonly NG_APP_MODE_ORDER: string;
+  readonly NG_APP_ITEMS_FOR_PAGE_TABLES: number;
+  readonly NG_APP_SEARCH_BY: string;
 
 }
 
