@@ -45,16 +45,16 @@ export class DashboardComponent {
       this.optionsMenu.push({icon: this.iconPositions, optionName: 'Posiciones', link: 'positions/positions-table', status: true});
       this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/my-class', status: true});
       this.optionsMenu.push({icon: this.iconChatIA, optionName: 'Chat IA', link: 'chat-ia', status: true});
-      this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help', status: true});
-      this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
+      this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help/list-videos-help', status: true});
+      // this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
     }
     else if(this.typeUser==environment.TEACHER){
-      this.router.navigate(['activities/list-activities'], { relativeTo: this.routerActivated })
+      this.router.navigate(['dashboard/options'], { relativeTo: this.routerActivated })
       this.optionsMenu.push({icon: this.iconModules, optionName: 'Módulos', link: 'modules/list-modules', status: true});
       this.optionsMenu.push({icon: this.iconActivities, optionName: 'Actividades', link: 'activities/list-activities', status: true});
       this.optionsMenu.push({icon: this.iconMyClass, optionName: 'Mis clases', link: 'classes/list-classes', status: true});
-      this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help', status: true});
-      this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
+      this.optionsMenu.push({icon: this.iconHelp, optionName: 'Ayuda', link: 'help/list-videos-help', status: true});
+      // this.optionsMenu.push({icon: this.iconInformation, optionName: 'Acerca de', link: 'information', status: true});
     }
     else {
       //Opciones de administrador

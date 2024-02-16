@@ -164,6 +164,8 @@ export class ActivitiesContainerComponent {
       this.modulesService.validateResponseUser(this.getHeaders(), this.answerUserId, body)
         .subscribe({
           next: (data: ApiResponseValidateAnswerI) => {
+            console.log("Imprimiento data")
+            console.log(data);
             this.statusAnswer = data.is_correct ? 1 : 2;
             this.feedback = data.feedback;
             this.nameButton = "Siguiente";

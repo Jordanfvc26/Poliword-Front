@@ -85,8 +85,8 @@
                         <div class="col-9">
                             <div class="row mt-1"
                                 [ngStyle]="{'color': statusAnswer == 1 ? '#5952A2' : statusAnswer == 2 ? '#FC3B56' : '#5952A2'}">
-                                <p><b>¡{{feedback=="Respuesta correcta" ? feedback: 'Respuesta incorrecta'}}!</b></p>
-                                <p>{{feedback=="Respuesta correcta" ? 'Sigue adelante': feedback}}</p>
+                                <p><b>¡{{statusAnswer==1 ? 'Respuesta correcta': 'Respuesta incorrecta'}}!</b></p>
+                                <p>{{feedback}}</p>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,98 @@
+@if(!spinnerStatus){
+    <app-spinner></app-spinner>
+}
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 container-info">
+            <div class="div mt-3 mx-1">
+                <h4 id="titulo"><fa-icon [icon]="iconMyProfile" class="icon-title"></fa-icon> Mi perfil</h4>
+            </div>
+
+            <div class="row mt-3">
+                <!--Card con información del Nombre y departamento-->
+                <div class="col-lg-4">
+                    <div class="card mb-4" style="background-color: #eee;">
+                        <div class="card-body text-center">
+                            <img [src]="infoUser.url_avatar" alt="avatar"
+                                class="rounded-circle img-fluid" style="width: 125px;" id="img-profile">
+                            <h4 class="my-3">{{infoUser.first_name + " " + infoUser.last_name}}</h4>
+                            <p class="text-muted mb-4"><i>{{infoUser.type_user=="teacher"?"Profesor":infoUser.type_user=="student"?"Estudiante":"Adminisytrador"}}</i></p>
+                           <!--  <div class="d-flex justify-content-center mb-2">
+                                 <button type="button" class="btn btn-primary">Editar perfil</button>
+                            </div> -->
+                            <div class="local text-center">
+                                <p class="text-muted mb-1">Quevedo - Ecuador</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <!--Card de información personal-->
+                    <div class="card mb-4" style="background-color: #eee;">
+                        <div class="card-body">
+                            <h5 class="mb-4"> <fa-icon [icon]="iconInformation" class="icon-title"></fa-icon> <b>
+                                    Información
+                                    básica</b></h5>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Nombres</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.first_name + " " +
+                                        infoUser.last_name}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Teléfono</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.whatsapp==""?"No registrado":infoUser.whatsapp}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Fecha de nacimiento</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.birth_date}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Correo electrónico</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.email}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Estado</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.status=="actived"?"Activo":"Inactivo"}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="mb-0 info">Puntos ganados</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">{{infoUser.points_earned}} puntos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

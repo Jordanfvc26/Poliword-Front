@@ -17,6 +17,10 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
   styleUrl: './theory.component.css'
 })
 export class TheoryComponent {
+  
+  //Variables
+  static theory: string = "";
+  theoryLocal: string = "";
 
   //constructor
   constructor(
@@ -26,6 +30,7 @@ export class TheoryComponent {
 
   //ngOnInit
   ngOnInit(){
+    this.theoryLocal = TheoryComponent.theory;
   }
 
   //Método que ejecuta un alert para confirmar si desea abandonar la práctica

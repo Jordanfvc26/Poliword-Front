@@ -40,7 +40,7 @@
                         <p><small><i class="text-capitalize">{{userInformation.type_user}}</i></small> <br />{{userInformation.first_name + userInformation.last_name}}</p>
                     </div>
                     <hr>
-                    <li><a [routerLink]="'profile/my-profile'"><fa-icon [icon]="iconProfile"></fa-icon> Mi perfil</a>
+                    <li><a [routerLink]="'user/user-profile'"><fa-icon [icon]="iconProfile"></fa-icon> Mi perfil</a>
                     </li>
                     <li><a [routerLink]="'password/change-password'"><fa-icon [icon]="iconPassword"></fa-icon> Contraseña</a></li>
                     <li><a (click)="signOut()"><fa-icon [icon]="iconLogOut"></fa-icon> Cerrar sesión</a></li>
