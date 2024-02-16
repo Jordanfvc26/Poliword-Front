@@ -19,6 +19,12 @@ import { ListClassComponent } from './teacher/components/classes/list-class/list
 import { ListModulesComponent } from './teacher/components/modules/list-modules/list-modules.component';
 import { CreateModuleComponent } from './teacher/components/modules/create-module/create-module.component';
 import { EditModuleComponent } from './teacher/components/modules/edit-module/edit-module.component';
+import { NewActivityContainerComponent } from './teacher/components/activities/new-activity-container/new-activity-container.component';
+import { SingleSelectComponent } from './teacher/components/activities/single-select/single-select.component';
+import { MultipleSelectComponent } from './teacher/components/activities/multiple-select/multiple-select.component';
+import { OrderWordsComponent } from './teacher/components/activities/order-words/order-words.component';
+import { CompleteWordComponent } from './teacher/components/activities/complete-word/complete-word.component';
+import { TrueOrFalseComponent } from './teacher/components/activities/true-or-false/true-or-false.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -72,7 +78,17 @@ export const routes: Routes = [
               { path: 'edit-module', component: EditModuleComponent }
             ]
           },
-          { path: 'activities/list-activities', component: ListActivitiesComponent },
+          { path: 'activities',
+            children: [
+              { path: 'list-activities', component: ListActivitiesComponent },
+              { path: 'new-activity', component: NewActivityContainerComponent },
+              { path: 'edit-activity-single-selection', component: SingleSelectComponent },
+              { path: 'edit-activity-multiple-selection', component: MultipleSelectComponent },
+              { path: 'edit-activity-order-word', component: OrderWordsComponent },
+              { path: 'edit-activity-true-or-false', component: TrueOrFalseComponent },
+              { path: 'edit-activity-complete-word', component: CompleteWordComponent },
+            ]
+          },
           { path: 'classes/list-classes', component: ListClassComponent },
         ]
       }

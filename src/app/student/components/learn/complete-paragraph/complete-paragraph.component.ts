@@ -58,6 +58,7 @@ export class CompleteParagraphComponent {
     if (event.target instanceof HTMLInputElement) {
       if (this.completeWordForm.get("wordToComplete")?.value !== null && this.completeWordForm.get("wordToComplete")?.value != '' && this.completeWordForm.get("wordToComplete")?.value != undefined) {
         this.textComplete.next(this.completeWordForm.get("wordToComplete")?.value);
+        this.textToComplete.emit([(this.completeWordForm.get("wordToComplete")?.value).toLowerCase()]);
       }
     }
   }
