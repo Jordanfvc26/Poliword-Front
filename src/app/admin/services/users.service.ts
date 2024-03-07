@@ -36,8 +36,6 @@ export class UsersService {
 
   //Método que consume el servicio para desactivar (bloquear) un usuario
   desactivateUser(userID: number): Observable<any> {
-    this.headers = this.headers.append('Authorization', `Bearer ${sessionStorage.getItem('token')}`);
-    this.options = { headers: this.headers };
     return this.http.put<any>(this.urlApi + `/api/users/${userID}/blocked`, {}, this.options);
   }
 
