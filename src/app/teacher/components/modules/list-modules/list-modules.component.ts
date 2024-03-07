@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 import { EditModuleComponent } from '../edit-module/edit-module.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ViewDetailsComponent } from '../modals/view-details/view-details.component';
+import { ViewActivitiesComponent } from '../modals/view-activities/view-activities.component';
 
 @Component({
   selector: 'app-list-modules',
@@ -25,7 +26,8 @@ import { ViewDetailsComponent } from '../modals/view-details/view-details.compon
     MatPaginatorModule,
     SpinnerComponent,
     SearchRegistersPipe,
-    ViewDetailsComponent
+    ViewDetailsComponent,
+    ViewActivitiesComponent
   ],
   providers: [
     ModulesService,
@@ -59,7 +61,6 @@ export class ListModulesComponent {
   //ngOnInit
   ngOnInit() {
     this.spinnerStatus = true;
-    console.log(this.statusFilter);
     this.getListModulesCreatedForMe(this.currentPage, this.itemsForPage);
   }
 
@@ -186,6 +187,12 @@ export class ListModulesComponent {
     this.modal.open(viewModuleDetail, { size: 'lg', centered: true });
   }
 
+  //Método que abre el modal para mostrar las actividades de un módulo seleccionado
+  openModalViewActivities(viewActivities: any, moduleID: number) {
+    ViewActivitiesComponent.moduleID = moduleID;
+    this.modal.open(viewActivities, { size: 'xl', centered: true });
+  }
+
   //Icons to use
   iconModules = iconos.faCubes;
   iconAdd = iconos.faCirclePlus;
@@ -195,6 +202,7 @@ export class ListModulesComponent {
   iconNext = iconos.faArrowRight;
   //Icons for table
   iconViewDetails = iconos.faEye;
+  iconViewActivities = iconos.faIcons;
   iconEdit = iconos.faEdit;
   iconPublic = iconos.faEarthAmericas;
   iconPrivate = iconos.faLock;

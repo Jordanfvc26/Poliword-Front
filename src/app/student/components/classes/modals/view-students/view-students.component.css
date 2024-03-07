@@ -50,3 +50,9 @@ thead {
 fa-icon {
   color: var(--primary-color);
 }
+
+
+.table-responsive{
+  height: auto !important;
+  overflow-y: auto !important;
+}

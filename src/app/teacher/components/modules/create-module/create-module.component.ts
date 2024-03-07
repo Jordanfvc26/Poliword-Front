@@ -82,7 +82,7 @@ export class CreateModuleComponent {
     let body: BodyCreateModuleIT = {
       title: this.createNewModule.get('title')?.value,
       short_description: this.createNewModule.get('shortDescription')?.value,
-      text_root: this.createNewModule.get('textRoot')?.value,
+      text_root: this.createNewModule.get('textRoot')?.value.replace(/\n/g, '\r\n'),
       img_back_url: this.createNewModule.get('imgBackURL')?.value,
       difficulty: this.createNewModule.get('difficulty')?.value,
       points_to_earn: 100,

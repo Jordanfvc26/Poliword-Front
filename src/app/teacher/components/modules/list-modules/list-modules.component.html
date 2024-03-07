@@ -61,7 +61,7 @@
                                 @for(module of arrayModules | searchRegisters:modulesToSearch:searchBy; track $index){
                                     <tr>
                                         <th scope="row">{{$index+1}}</th>
-                                        <td>{{module.title}}</td>
+                                        <td data-bs-toggle="mensaje" title="{{module.title}}">{{module.title}}</td>
                                         <td>{{module.create_by.first_name + " " + module.create_by.last_name}}</td>
                                         <td class="iconPublicPrivate">
                                             <fa-icon [icon]="module.is_public ? iconPublic : iconPrivate"></fa-icon>
@@ -72,6 +72,8 @@
                                         <td class="actions">
                                             <fa-icon data-bs-toggle="mensaje" title="Ver detalles" id="iconViewDetails"
                                                 [icon]="iconViewDetails" (click)="openModalViewModuleDetails(viewModuleDetail, module.id)"></fa-icon>
+                                            <fa-icon data-bs-toggle="mensaje" title="Ver actividades" id="iconViewActivities"
+                                                [icon]="iconViewActivities" (click)="openModalViewActivities(viewActivities, module.id)"></fa-icon>
                                             @if(statusFilter=='for-me'){
                                                 <fa-icon data-bs-toggle="mensaje" title="Editar" id="iconEdit"
                                                 [icon]="iconEdit" (click)="editModule(module, module.id)"></fa-icon>
@@ -118,4 +120,9 @@
 <!--Modal para ver información detallada de un módulo-->
 <ng-template #viewModuleDetail>
     <app-view-details></app-view-details>
+ </ng-template>
+
+ <!--Modal para ver las actividades de un módulo-->
+<ng-template #viewActivities>
+    <app-view-activities></app-view-activities>
  </ng-template>

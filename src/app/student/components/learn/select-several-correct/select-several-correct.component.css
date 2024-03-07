@@ -1,6 +1,11 @@
 .option label {
     margin-left: -2rem !important;
     margin-right: -2rem !important;
+    font-size: 18px !important;
+}
+
+.text-root{
+    font-size: 17px !important;
 }
 
 /*For small screens*/

@@ -28,7 +28,6 @@ export class UserProfileComponent {
   ngOnInit(){
     this.spinnerStatus = true;
     this.infoUser = JSON.parse(sessionStorage.getItem('infoUser') || '{}');
-    console.log(this.infoUser);
   }
 
   //Icons to use

@@ -101,10 +101,13 @@ export class ModulesComponent {
         next: (data: ApiResponseSubscribedModulesI) => {
           if (Object.keys(data).length != 0) {
             this.arrayModules = data;
+            if(data.details.total_page == 0)
+              this.toastr.showToastInformation("Información", "Actualmente no te encuentras suscrito a ningún módulo");
           }
-          else {
-            this.toastr.showToastInformation("Información", "Actualmente no te encuentras suscrito a ningún módulo");
-          }
+          // else {
+          //   console.log("entrando")
+          //   this.toastr.showToastInformation("Información", "Actualmente no te encuentras suscrito a ningún módulo");
+          // }
           this.totalPage = data.details.total_page;
           this.setPaginator();
           this.spinnerStatus = true;

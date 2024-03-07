@@ -50,25 +50,28 @@
             </div>
         </div>
         }
+       
         <!--Paginación-->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled" [class.disabled]="currentPage === 1">
-                    <a class="page-link custom-page-link" (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"
-                        > <fa-icon [icon]="iconBack"></fa-icon> Anterior</a>
-                </li>
-                @for(page of arrayPaginator; track $index){
-                <li class="page-item" [class.active]="currentPage === $index + 1">
-                    <a class="page-link custom-page-link" (click)="pageChanged($index+1)">{{ $index+1 }}</a>
-                </li>
-                }
-                <li class="page-item" [class.disabled]="currentPage === arrayPaginator.length">
-                    <a class="page-link custom-page-link"
-                        (click)="currentPage < arrayPaginator.length ? pageChanged(currentPage +1) : null">Siguiente 
-                        <fa-icon [icon]="iconNext"></fa-icon></a>
-                </li>
-            </ul>
-        </nav>
+        @if(totalPage != 0){
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" [class.disabled]="currentPage === 1">
+                        <a class="page-link custom-page-link" (click)="currentPage > 1 ? pageChanged(currentPage - 1) : null" tabindex="-1"
+                            > <fa-icon [icon]="iconBack"></fa-icon> Anterior</a>
+                    </li>
+                    @for(page of arrayPaginator; track $index){
+                    <li class="page-item" [class.active]="currentPage === $index + 1">
+                        <a class="page-link custom-page-link" (click)="pageChanged($index+1)">{{ $index+1 }}</a>
+                    </li>
+                    }
+                    <li class="page-item" [class.disabled]="currentPage === arrayPaginator.length">
+                        <a class="page-link custom-page-link"
+                            (click)="currentPage < arrayPaginator.length ? pageChanged(currentPage +1) : null">Siguiente 
+                            <fa-icon [icon]="iconNext"></fa-icon></a>
+                    </li>
+                </ul>
+            </nav>
+        }
     </div>
 </body>
 

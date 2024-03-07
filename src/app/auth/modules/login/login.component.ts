@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router } from '@angular/router';
-import { ApiResponseLogin } from '../../interfaces/login';
+import { ApiResponseLogin, LoginErrorI } from '../../interfaces/login';
 import { LoginService } from '../../services/login.service';
 import { environment } from '../../../../environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,10 +18,10 @@ import * as AOS from 'aos';
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule, 
-    FontAwesomeModule, 
-    ReactiveFormsModule, 
-    HttpClientModule, 
+    CommonModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     ToastrModule,
     SpinnerComponent
   ],
@@ -36,13 +36,13 @@ export class LoginComponent {
   //Variables
   showPassword: boolean = false;
   spinnerStatus: boolean = false;
-  
+
   //Fomrulario de login
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
-  
+
   //Constructor
   constructor(
     private router: Router,
@@ -99,13 +99,15 @@ export class LoginComponent {
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Profesor")
             } else if (res.user.type_user === environment.ADMIN) {
               this.spinnerStatus = true;
-             /*  this.router.navigateByUrl('/student/home/dashboard'); */
+              this.router.navigateByUrl('/admin/home/dashboard/options');
               this.toastr.showToastSuccess("Bienvenido de nuevo!", "Administrador")
             }
           },
-          error: (error) => {
+          error: (res: LoginErrorI) => {
+            console.log(res)
             this.spinnerStatus = true;
-            this.toastr.showToastError("Error", "Credenciales incorrectas");
+            if (res.error.status === "error")
+              this.toastr.showToastError(res.error.message, res.error.data);
           }
         });
     } else {

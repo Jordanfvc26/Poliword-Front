@@ -24,7 +24,7 @@
                             @for(module of filteredModulesTitle; track $index){
                                 <mat-option
                                     [value]="module.title"
-                                    (click)="getActivitiesByModule(module.id, currentPage)">
+                                    (click)="getActivitiesByModule(module.id, currentPage, itemsForPage)">
                                     {{ module.title }}
                                 </mat-option>
                             }

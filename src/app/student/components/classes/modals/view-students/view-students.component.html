@@ -8,6 +8,13 @@
     </div>
     
     <div class="modal-body">
+         <!--Buscar módulo por nombre (Título)-->
+         <div class="col-12 col-md-5 col-lg-5 mb-3">
+            <form>
+                <input class="form-control me-1" type="text" placeholder="Buscar por apellidos..." name="searchStudents"
+                    [(ngModel)]="studentsToSearch">
+            </form>
+        </div>
         <div class="card" id="htmlTablePDF">
             <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
                 <table class="table table-striped mb-0" id="htmlExcelTable">
@@ -15,19 +22,17 @@
                         <tr>
                             <th scope="col">N°</th>
                             <th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">correo</th>
+                            <th scope="col">Correo</th>
                             <th scope="col">Fecha de nacimiento</th>
                             <th scope="col">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(arrayStudents.length > 0) {
-                            <tr>
-                                @for(class of arrayStudents; track $index){
+                            @for(class of arrayStudents | searchRegisters:studentsToSearch:searchBy; track $index){
+                                <tr>
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{class.first_name}}</td>
-                                    <td>{{class.last_name}}</td>
                                     <td>{{class.email}}</td>
                                     <td>{{class.birth_date}}</td>
                                     <td>
@@ -39,8 +44,8 @@
                                             {{class.status? "Activo" : "Inactivo"}}
                                         </div>
                                     </td>
-                                }
-                            </tr>
+                                </tr>
+                            }
                         }
                         @else{
                             @if(!spinnerStatus){
@@ -52,17 +57,13 @@
                             }
                             @else {
                                 <tr>
-                                    <td colspan="7" class="no-results">Sin resultados...</td>
+                                    <td colspan="5" class="no-results">Sin resultados...</td>
                                 </tr>
                             }
                         }
                     </tbody>
                 </table>
             </div>
-            <!--Paginación-->
-            <mat-paginator id="paginacion" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="itemsForPage"
-                [length]="arrayStudents.length" (page)="changePage($event)">
-            </mat-paginator>
         </div>
     </div>
 

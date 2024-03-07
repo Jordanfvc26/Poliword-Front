@@ -25,6 +25,13 @@ export class SelectWithSentenceComponent {
     { id: '2', idHTML: 'option2', label: 'Opción 2', optionNumber: 'b', selected: false },
     { id: '3', idHTML: 'option3', label: 'Opción 3', optionNumber: 'c', selected: false },
   ];
+  arrayImgPaths = [
+    'assets/img-questions/question-with-sentence.png',
+    'assets/img-questions/question-with-sentence-2.png',
+    'assets/img-questions/question-with-sentence-3.png',
+  ];
+  randomIndexImg: number = 0;
+  randomImagePath: string = "";
 
   //Constructror
   constructor(
@@ -39,6 +46,8 @@ export class SelectWithSentenceComponent {
         option.label = this.activity.question.options.text_options[index];
       });
     }
+    this.randomIndexImg = Math.floor(Math.random() * this.arrayImgPaths.length);
+    this.randomImagePath = this.arrayImgPaths[this.randomIndexImg];
     AOS.init();
   }
 

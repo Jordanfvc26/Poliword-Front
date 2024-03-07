@@ -7,11 +7,11 @@
     <!--Pregunta-->
     <div class="row d-flex mb-4">
         <div class="col-12 col-md-3 col-lg-3 order d-flex align-items-center justify-content-center">
-            <img src="https://images.vexels.com/media/users/3/157292/isolated/preview/1013ce3cf5903ef5afe01f0fd443dc03-diseno-colorido-de-pizza-entera.png"
+            <img [src]="randomImagePath"
                 alt="img-activity">
         </div>
         <div class="col-12 col-md-9 col-lg-9 d-flex align-items-center justify-content-center">
-            <p>{{activity.question.text_root}}</p>
+            <p class="text-root">{{activity.question.text_root}}</p>
         </div>
     </div>
 

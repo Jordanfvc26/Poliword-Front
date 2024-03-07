@@ -144,9 +144,8 @@ export class ListActivitiesComponent {
 
   //Método para manejar el cambio de página
   pageChanged(page: number) {
-    this.arrayActivities = [];
     this.currentPage = page;
-    this.getActivitiesByModule(this.moduleID, this.currentPage);
+    this.getActivitiesByModule(this.moduleID, this.currentPage, this.itemsForPage);
   }
 
   //Método para buscar el modulo, entre las opciones del select
@@ -164,11 +163,10 @@ export class ListActivitiesComponent {
   }
 
   //Método que obtiene el listado de actividades de un módulo según el ID
-  getActivitiesByModule(moduleID: number, currentPage: number) {
+  getActivitiesByModule(moduleID: number, currentPage: number, itemsForPage: number) {
     this.spinnerStatus = false;
     this.moduleID = moduleID;
-    this.currentPage = currentPage;
-    this.activitiesService.getActivitiesByModule(this.getHeaders(), this.currentPage, 10, "id", "asc", moduleID)
+    this.activitiesService.getActivitiesByModule(this.getHeaders(), currentPage, itemsForPage, "id", "asc", moduleID)
       .subscribe({
         next: (data: ApiResponseListActivitiesIT) => {
           this.arrayActivities = data.data;
@@ -246,13 +244,13 @@ export class ListActivitiesComponent {
             next: () => {
               this.spinnerStatus = true;
               this.toastr.showToastSuccess("Pregunta eliminada correctamente", "Éxito");
-              this.getActivitiesByModule(this.moduleID, this.currentPage);
+              this.getActivitiesByModule(this.moduleID, this.currentPage, this.itemsForPage);
             },
             error: (error: any) => {
               this.spinnerStatus = true;
               if (error.status === 200 && error.statusText === "OK") {
                 this.toastr.showToastSuccess("Pregunta eliminada correctamente", "Éxito");
-                this.getActivitiesByModule(this.moduleID, this.currentPage);
+                this.getActivitiesByModule(this.moduleID, this.currentPage, this.itemsForPage);
               } else {
                 this.toastr.showToastError("Error", "Ocurrió un error al actualizar la pregunta");
               }

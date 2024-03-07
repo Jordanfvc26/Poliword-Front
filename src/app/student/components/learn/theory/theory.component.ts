@@ -35,7 +35,7 @@ export class TheoryComponent {
 
   //Método que ejecuta un alert para confirmar si desea abandonar la práctica
   leavePractice(){
-    this.sweetAlerts.alertConfirmCancelQuestion("Abandonar práctica", "¿Estás seguro de abandonar tu práctica del módulo \"" +  + "\"?").then(respuesta => {
+    this.sweetAlerts.alertConfirmCancelQuestion("Abandonar práctica", "¿Estás seguro de abandonar la práctica que tienes en curso?").then(respuesta => {
       if (respuesta.value == true) {
         this.router.navigateByUrl('student/home/learn/modules');
       }

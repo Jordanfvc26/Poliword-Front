@@ -2,6 +2,10 @@ img {
     width: 120px;
 }
 
+.text-root{
+    font-size: 17px !important;
+}
+
 /*Hover y no hover para cuando se selecciona una opción*/
 .option:not(.selected) .option-number,
 .option:not(.selected) label {
@@ -35,6 +39,7 @@ img {
     padding: 8px;
     border: none;
     background-color: transparent;
+    font-size: 18px !important;
 }
 
 /*Para darle el primary y secondary color cuando selecciono una opción*/

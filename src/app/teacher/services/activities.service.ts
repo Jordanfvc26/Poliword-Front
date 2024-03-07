@@ -31,7 +31,7 @@ export class ActivitiesService {
     queryParams += `limit=${limit}&`;
     queryParams += `sort=${sort}&`;
     queryParams += `order=${order}`;
-    return this.http.get<ApiResponseListActivitiesIT>(this.urlApi + `/api/module/${idModule}/question/activities`, this.options);
+    return this.http.get<ApiResponseListActivitiesIT>(this.urlApi + `/api/module/${idModule}/question/activities${queryParams}`, this.options);
   }
 
   //Método que consume el servicio para registrar una pregunta manualmente o con IA

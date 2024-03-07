@@ -10,8 +10,8 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
   standalone: true,
   imports: [
     CommonModule,
-  FontAwesomeModule
-],
+    FontAwesomeModule
+  ],
   templateUrl: './terms-conditions.component.html',
   styleUrls: ['./terms-conditions.component.css', '../login/login.component.css']
 })

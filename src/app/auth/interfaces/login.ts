@@ -17,3 +17,11 @@ export interface UserLoginI {
     status: string;
     type_user: string;
 }
+
+export interface LoginErrorI{
+   error: {
+    data: string;
+    message: string;
+    status: string;
+   }
+}

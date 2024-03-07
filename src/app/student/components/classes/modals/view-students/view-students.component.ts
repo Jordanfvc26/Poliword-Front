@@ -9,15 +9,21 @@ import { MyClassComponent } from '../../my-class/my-class.component';
 import { ApiResponseListsStudentsI } from '../../../../interfaces/classes';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { environment } from '../../../../../../environments/environment';
-import { SweetAlertsConfirm } from '../../../../../shared-components/alerts/confirm-alerts.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchRegistersPipe } from '../../../../../shared-components/pipes/search-registers.pipe';
 
 @Component({
   selector: 'app-view-students',
   standalone: true,
   imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     FontAwesomeModule,
     SpinnerComponent,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SearchRegistersPipe
   ],
   templateUrl: './view-students.component.html',
   styleUrl: './view-students.component.css'
@@ -28,9 +34,8 @@ export class ViewStudentsComponent {
   static classID: number = 0;
   spinnerStatus: boolean = false;
   arrayStudents: CreatedByI[] = [];
-  itemsForPage: number = environment.ITEMS_FOR_PAGE;
-  initialPage: number = 0;
-  finalPage: number = environment.ITEMS_FOR_PAGE;
+  studentsToSearch: CreatedByI[] = [];
+  searchBy: string = environment.SEARCH_STUDENT_BY;
 
   //Constructor
   constructor(
@@ -45,7 +50,7 @@ export class ViewStudentsComponent {
     this.getStudents();
   }
 
-  //Mètodo que consume el servicio para obtener el listado de estudiantes de la clase
+  //Método que consume el servicio para obtener el listado de estudiantes de la clase
   getStudents() {
     this.spinnerStatus = false;
     this.classesService.getStudents(this.classesComponent.getHeaders(), ViewStudentsComponent.classID)
@@ -58,16 +63,6 @@ export class ViewStudentsComponent {
           alert(error);
         }
       })
-  }
-
-  //Método que cambia las páginas de la tabla
-  changePage(e: PageEvent) {
-    this.itemsForPage = e.pageSize;
-    this.initialPage = e.pageIndex * this.itemsForPage;
-    this.finalPage = this.initialPage + this.itemsForPage;
-    if (this.finalPage > this.arrayStudents.length) {
-      this.finalPage = this.arrayStudents.length;
-    }
   }
 
   //Icons to use

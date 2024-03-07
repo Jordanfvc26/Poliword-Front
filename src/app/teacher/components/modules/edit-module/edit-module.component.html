@@ -21,7 +21,7 @@
                             placeholder="Título*"
                             [ngClass]="{
                                     'is-invalid': editForm.get('title')?.hasError('required') && editForm.get('title')?.touched || editForm.get('title')?.hasError('pattern') }"
-                            [maxlength]="22">
+                            [maxlength]="50">
                         @if(editForm.get('title')?.hasError('required') && editForm.get('title')?.touched){
                             <div class="validators">
                                 <small>¡Este campo es requerido!</small>
@@ -43,7 +43,7 @@
                             formControlName="shortDescription" placeholder="Descripción corta*"
                             [ngClass]="{
                                     'is-invalid': editForm.get('shortDescription')?.hasError('required') && editForm.get('shortDescription')?.touched || editForm.get('shortDescription')?.hasError('pattern') }"
-                            [maxlength]="50">
+                            [maxlength]="80">
                         @if(editForm.get('shortDescription')?.hasError('required') && editForm.get('shortDescription')?.touched){
                             <div class="validators">
                                 <small>¡Este campo es requerido!</small>
@@ -53,15 +53,15 @@
                 </div>
 
                 <div class="row">
-                    <!--Descripción larga-->
+                    <!--Teoría-->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="mb-3">
-                            <label class="mb-1"><b>Descripción</b></label>
+                            <label class="mb-1"><b>Teoría</b></label>
                             <textarea class="form-control form-control-lg bg-light fs-6" formControlName="textRoot"
                                 placeholder="Descripción*" rows="5"
                                 [ngClass]="{
-                                        'is-invalid': editForm.get('textRoot')?.hasError('required') && editForm.get('textRoot')?.touched }"
-                                [maxlength]="500"></textarea>
+                                        'is-invalid': editForm.get('textRoot')?.hasError('required') && editForm.get('textRoot')?.touched }">
+                            </textarea>
                             @if(editForm.get('textRoot')?.hasError('required') && editForm.get('textRoot')?.touched){
                                 <div class="validators">
                                     <small>¡Este campo es requerido!</small>

@@ -10,6 +10,7 @@ export const environment = {
     ORDER_BY: import.meta.env.NG_APP_ORDER_BY,
     MODE_ORDER: import.meta.env.NG_APP_MODE_ORDER,
     ITEMS_FOR_PAGE_TABLES: import.meta.env.NG_APP_ITEMS_FOR_PAGE_TABLES,
-    SEARCH_BY: import.meta.env.NG_APP_SEARCH_BY
+    SEARCH_BY: import.meta.env.NG_APP_SEARCH_BY,
+    SEARCH_STUDENT_BY: import.meta.env.NG_APP_SEARCH_STUDENT_BY
   };
   
